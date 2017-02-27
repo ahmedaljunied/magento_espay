@@ -149,7 +149,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
 
         $selfSignature = Mage::helper('espaypaymentmethod/data')->generateTrxSignature($rqDatetime, $orderId, $mode);
 
-        $pr_status = Mage::getModel('sales/order_status')->load('payment_accepted_espay_' . strtolower($product_code));
+        $pr_status = Mage::getModel('sales/order_status')->load('accpt_espay_' . strtolower($product_code));
         $count_status = count($pr_status->getData('status'));
 
         if ($signature === $selfSignature) {
@@ -176,9 +176,9 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                             #$invoice->sendEmail(true, '');
 
                             $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, 'Payment Success With Ref <b>' . $paymentRef . '</b>.');
-                            if($count_status != 0){
-                                $order->setStatus('payment_accepted_espay_' . strtolower($product_code));
-                            }else{
+                            if ($count_status != 0) {
+                                $order->setStatus('accpt_espay_' . strtolower($product_code));
+                            } else {
                                 $order->setStatus('payment_accepted_espay');
                             }
                             $order->save();
@@ -229,7 +229,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
 
                     $orderData = $order->getData();
                     if (!empty($orderData)) {
-                        if ($orderData['status'] === 'payment_accepted_espay_' . strtolower($product)) {
+                        if ($orderData['status'] === 'accpt_espay_' . strtolower($product)) {
                             $redirect = TRUE;
                         }
                     }
