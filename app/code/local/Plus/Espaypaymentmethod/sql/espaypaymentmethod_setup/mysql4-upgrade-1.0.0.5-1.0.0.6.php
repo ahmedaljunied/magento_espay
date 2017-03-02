@@ -167,4 +167,7 @@ $installer->getConnection()->insertArray(
     ),
         )
 );
+
+$installer->getConnection()->delete($statusStateTable, array('status' => 'payment_accepted_espay_emoedikk'));
+
 $installer->endSetup();
