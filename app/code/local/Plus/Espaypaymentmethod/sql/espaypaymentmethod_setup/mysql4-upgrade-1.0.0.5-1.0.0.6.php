@@ -168,4 +168,35 @@ $installer->getConnection()->insertArray(
         )
 );
 
+/* Possible states: Mage_Sales_Model_Order::STATE_CANCELED Mage_Sales_Model_Order::STATE_CLOSED Mage_Sales_Model_Order::STATE_COMPLETE Mage_Sales_Model_Order::STATE_HOLDED Mage_Sales_Model_Order::STATE_NEW Mage_Sales_Model_Order::STATE_PAYMENT_REVIEW Mage_Sales_Model_Order::STATE_PENDING_PAYMENT Mage_Sales_Model_Order::STATE_PROCESSING */
+
+$status = Mage::getModel('sales/order_status'); // Delete some statuses 
+$status->setStatus('payment_accepted_espay_bcaatm')->delete();
+$status->setStatus('payment_accepted_espay_bcaklikpa')->delete(); //Add a new status 
+$status->setStatus('payment_accepted_espay_xltunai')->delete();
+$status->setStatus('payment_accepted_espay_biiatm')->delete();
+$status->setStatus('payment_accepted_espay_bnidbo')->delete();
+$status->setStatus('payment_accepted_espay_epaybri')->delete();
+$status->setStatus('payment_accepted_espay_briatm')->delete();
+$status->setStatus('payment_accepted_espay_danamonob')->delete();
+$status->setStatus('payment_accepted_espay_danamonat')->delete();
+$status->setStatus('payment_accepted_espay_dkiib')->delete();
+$status->setStatus('payment_accepted_espay_mandirism')->delete();
+$status->setStatus('payment_accepted_espay_finpay195')->delete();
+$status->setStatus('payment_accepted_espay_mandiriec')->delete();
+$status->setStatus('payment_accepted_espay_creditcar')->delete();
+
+$status->setStatus('payment_accepted_espay_mandiriib')->delete();
+$status->setStatus('payment_accepted_espay_maspionat')->delete();
+$status->setStatus('payment_accepted_espay_mayapadai')->delete();
+$status->setStatus('payment_accepted_espay_muamalata')->delete();
+$status->setStatus('payment_accepted_espay_nobupay')->delete();
+$status->setStatus('payment_accepted_espay_permataat')->delete();
+$status->setStatus('payment_accepted_espay_permatape')->delete();
+
+$status->setStatus('payment_accepted_espay_permatane')->delete();
+$status->setStatus('payment_accepted_espay_emoedikk2')->delete();
+
+$status->setStatus('payment_accepted_espay_emoedikk')->delete();
+
 $installer->endSetup();
