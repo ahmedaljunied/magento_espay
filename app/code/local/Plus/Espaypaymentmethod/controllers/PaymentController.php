@@ -85,7 +85,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
         curl_setopt($curl, CURLOPT_POST, 1);
         $resp = curl_exec($curl);
         curl_close($curl);        
-        // end        
+        // end
 
         $this->loadLayout();
         $block = $this->getLayout()->createBlock('Mage_Core_Block_Template', 'espaypaymentmethod', array('template' => 'espaypaymentmethod/redirect.phtml'));
