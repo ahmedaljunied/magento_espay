@@ -73,7 +73,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
         $name = $orderData['customer_firstname'] . " " . $orderData['customer_middlename'] . " " . $orderData['customer_lastname'];
         $email = $orderData['customer_email'];
         $order_no = $orderData['increment_id'];
-        $total = $orderData['grand_total'];
+        $total = explode(".", $orderData['grand_total'])[0];
         $transfer_no = $orderData['customer_id'];
         $transfer_bank = "Espay";
 
