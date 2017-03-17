@@ -238,6 +238,8 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
         $atmProducts = $productModel->atmProduct();
         $product = $this->getRequest()->get("product");
 
+        Mage::log(print_r($product, 1), null, 'espay_responsedata.log');
+
         $atm = FALSE;
 
         if ($this->getRequest()->get("id") && $this->getRequest()->get("product")) {
@@ -265,9 +267,11 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                 Mage_Core_Controller_Varien_Action::_redirect('espaypaymentmethod/payment/pending', array('_secure' => false, '_use_rewrite' => true, '_query' => array('id' => $this->getRequest()->get("id"))));
             } else {
                 Mage_Core_Controller_Varien_Action::_redirect('checkout/onepage/success', array('_secure' => false));
+                Mage::log(print_r($product, 1), null, 'espay_responsesuccess.log');
             }
         } else {
             Mage_Core_Controller_Varien_Action::_redirect('checkout/onepage/failure', array('_secure' => false));
+            Mage::log(print_r($product, 1), null, 'espay_responsefailed.log');
         }
     }
 
