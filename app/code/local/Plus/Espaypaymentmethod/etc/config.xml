@@ -6,6 +6,11 @@
     </Plus_Espaypaymentmethod>
   </modules>
   <global>
+    <payment>
+      <groups>
+        <espay>espaypaymentmethod</espay>
+      </groups>
+    </payment>
     <sales>
      <quote>
        <totals>
@@ -162,7 +167,7 @@
       </espaypaymentmethod>
 
       <espaypaymentmethod_creditcard>
-        <group>espay</group>
+        <group>espaypaymentmethod</group>
         <active>0</active>
         <model>espaypaymentmethod/paymentmethod_cc</model>
         <title>Espay Credit Card / Visa</title>
@@ -171,7 +176,7 @@
       </espaypaymentmethod_creditcard>
 
       <espaypaymentmethod_mandiri>
-        <group>espay</group>
+        <group>espaypaymentmethod</group>
         <active>0</active>
         <model>espaypaymentmethod/paymentmethod_mandiri</model>
         <title>Espay Mandiri</title>
@@ -180,8 +185,6 @@
       </espaypaymentmethod_mandiri>      
     </payment>
 
-
-    
   </default>
   <frontend>
     <routers>
