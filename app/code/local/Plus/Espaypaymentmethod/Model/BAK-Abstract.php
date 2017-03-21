@@ -1,7 +1,7 @@
 <?php
 // app/code/local/Envato/Custompaymentmethod/Model/Paymentmethod.php
 abstract class Plus_Espaypaymentmethod_Model_Abstract extends Mage_Payment_Model_Method_Abstract {
-  protected $_code  = 'espaypaymentmethod';
+  protected $_code  = 'espaypaymentmethod_abstract';
   protected $_formBlockType = 'espaypaymentmethod/form_espaypaymentmethod';
   protected $_infoBlockType = 'espaypaymentmethod/info_espaypaymentmethod';
 
@@ -83,6 +83,8 @@ abstract class Plus_Espaypaymentmethod_Model_Abstract extends Mage_Payment_Model
 
         if ($productCode === 'CREDITCARD' || $productCode === 'BNIDBO'){
           $pct = Mage::getStoreConfig('payment/espay/ccfee') ;
+          
+          
           $dec = str_replace('%', '', $pct) / 100;
           
           if ($address->getEspayFeeAmount() != 0 || $address->getEspayFeeAmount() !== NULL){
