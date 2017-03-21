@@ -77,6 +77,7 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
 
         if ($productCode === 'CREDITCARD' || $productCode === 'BNIDBO'){
           $pct = Mage::getStoreConfig('payment/espay/ccfee') ;
+          Mage::log(print_r($address, 1), null, 'espay_store_address.log');
           Mage::log(print_r($pct, 1), null, 'espay_store_config.log');
           $dec = str_replace('%', '', $pct) / 100;
           Mage::log(print_r($dec, 1), null, 'espay_store_fee.log');
