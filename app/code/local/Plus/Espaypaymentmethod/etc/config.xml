@@ -163,7 +163,7 @@
 
       <espaypaymentmethod_creditcard>
         <active>1</active>
-        <model>espaypaymentmethod/paymentmethod</model>
+        <model>espaypaymentmethod/paymentmethod_cc</model>
         <order_status>pending</order_status>
         <title>Espay Payment CC</title>
         <allowspecific>0</allowspecific>
