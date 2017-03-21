@@ -85,9 +85,9 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
               $totalWithoutFee = $address->getOrigData('grand_total') - $address->getEspayFeeAmount();
           }
           $total = floatval($totalWithoutFee) + floatval($fee); 
-          $desc = 0.025;       
-          $ccFee = $dec * $total;
-          $fee = floatval($fee)+floatval($ccFee);
+          $desc = 2.5;       
+          $ccFee = (floatval($dec) * floatval($total)) / 100;
+          $fee = floatval($fee) + floatval($ccFee);
           Mage::log("total: ". $total . " desc: " . $desc ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
         }
       }
