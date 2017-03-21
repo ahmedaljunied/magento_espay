@@ -160,6 +160,15 @@
         <transaction_fee>5000</transaction_fee>
         <transaction_fee_label>Transaction Fee</transaction_fee_label>
       </espaypaymentmethod>
+      
+      <espaypaymentmethod_creditcard>
+        <active>1</active>
+        <model>espaypaymentmethod/paymentmethod_cc</model>
+        <title>Credit Card Master / Visa</title>
+        <order_status>processing</order_status>
+        <allowspecific>0</allowspecific>
+      </espaypaymentmethod_creditcard>
+
     </payment>
   </default>
   <frontend>
