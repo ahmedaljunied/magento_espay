@@ -72,13 +72,11 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
         $paymentData = $data['espay_payment_method'];
         $espayPayment = explode(':', $paymentData);
         $productCode = $espayPayment[0];
-        
         $trxfee = Mage::getStoreConfig('payment/espay/'.strtolower($productCode).'trxfee') ;
         $fee = ($trxfee === NULL ? $fee : $trxfee);
 
         if ($productCode === 'CREDITCARD' || $productCode === 'BNIDBO'){
           $pct = Mage::getStoreConfig('payment/espay/ccfee') ;
-          Mage::log(print_r($address, 1), null, 'espay_store_address.log');
           Mage::log(print_r($pct, 1), null, 'espay_store_config.log');
           $dec = str_replace('%', '', $pct) / 100;
           Mage::log(print_r($dec, 1), null, 'espay_store_fee.log');
