@@ -160,16 +160,28 @@
         <transaction_fee>5000</transaction_fee>
         <transaction_fee_label>Transaction Fee</transaction_fee_label>
       </espaypaymentmethod>
-      
+
       <espaypaymentmethod_creditcard>
-        <active>1</active>
+        <group>espay</group>
+        <active>0</active>
         <model>espaypaymentmethod/paymentmethod_cc</model>
-        <title>Credit Card Master / Visa</title>
+        <title>Espay Credit Card / Visa</title>
         <order_status>processing</order_status>
         <allowspecific>0</allowspecific>
       </espaypaymentmethod_creditcard>
 
+      <espaypaymentmethod_mandiri>
+        <group>espay</group>
+        <active>0</active>
+        <model>espaypaymentmethod/paymentmethod_mandiri</model>
+        <title>Espay Mandiri</title>
+        <order_status>processing</order_status>
+        <allowspecific>0</allowspecific>
+      </espaypaymentmethod_mandiri>      
     </payment>
+
+
+    
   </default>
   <frontend>
     <routers>
