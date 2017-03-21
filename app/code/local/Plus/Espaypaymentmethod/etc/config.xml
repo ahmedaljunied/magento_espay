@@ -160,21 +160,6 @@
         <transaction_fee>5000</transaction_fee>
         <transaction_fee_label>Transaction Fee</transaction_fee_label>
       </espaypaymentmethod>
-
-      <espaypaymentmethod_creditcard>
-        <active>1</active>
-        <model>espaypaymentmethod/paymentmethod_cc</model>
-        <order_status>pending</order_status>
-        <title>Espay Payment CC</title>
-        <allowspecific>0</allowspecific>
-        <payment_action>sale</payment_action>
-        <min_order_total>5000</min_order_total>
-        <max_order_total>100000000</max_order_total>
-        <credit_card_fee>3%</credit_card_fee>
-        <transaction_fee>5000</transaction_fee>
-        <transaction_fee_label>Transaction Fee</transaction_fee_label>
-      </espaypaymentmethod_creditcard>
-
     </payment>
   </default>
   <frontend>
