@@ -88,7 +88,7 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
           $total = floatval($totalWithoutFee) + floatval($fee);
           $ccFee = floatval($dec) * floatval($total);
           $fee = floatval($fee)+floatval($ccFee);
-          Mage::log("total: ". $total ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
+          Mage::log("totalWithoutFee: ". $totalWithoutFee . "total: ". $total ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
         }
       }
       return $fee;
