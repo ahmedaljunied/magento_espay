@@ -66,7 +66,6 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
   public static function getFee($address)
     {
       $paymentMethod = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getCode();Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getCode();
-      Mage::log(print_r($address, 1), null, 'espay_store_config.log');
       if ($paymentMethod === 'espaypaymentmethod'){
         $fee = 5000;
         $data = Mage::app()->getRequest()->getPost('payment');
