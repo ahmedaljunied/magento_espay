@@ -84,11 +84,19 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
           if ($address->getEspayFeeAmount() != 0 || $address->getEspayFeeAmount() !== NULL){
               $totalWithoutFee = $address->getOrigData('grand_total') - $address->getEspayFeeAmount();
           }
-          $total = floatval($totalWithoutFee) + floatval($fee); 
-          $desc = 2.5;       
-          // $ccFee = (floatval($dec) * floatval($total)) / 100;
-          $ccFee = (floatval(2.5) * $total) / 100;
-          $fee = $fee + $ccFee;
+          
+          $total = floatval($totalWithoutFee) + floatval($fee);
+
+          if ($productCode === 'CREDITCARD') {
+              $ccFee = (floatval(2.5) * $total) / 100;
+              $fee = $fee + $ccFee + 3000;
+          }
+
+          else {
+            $ccFee = floatval($dec) * floatval($total);
+            $fee = floatval($fee)+floatval($ccFee);
+          }
+
           Mage::log("total: ". $total . " desc: " . $desc ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
         }
       }
