@@ -77,9 +77,9 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
 
         if ($productCode === 'CREDITCARD' || $productCode === 'BNIDBO'){
           $pct = Mage::getStoreConfig('payment/espay/ccfee') ;
-          Mage::log(print_r($pct, 1), null, 'espay_store_config.log');
+          // Mage::log(print_r($pct, 1), null, 'espay_store_config.log');
           $dec = str_replace('%', '', $pct) / 100;
-          Mage::log(print_r($dec, 1), null, 'espay_store_fee.log');
+          // Mage::log(print_r($dec, 1), null, 'espay_store_fee.log');
 
           if ($address->getEspayFeeAmount() != 0 || $address->getEspayFeeAmount() !== NULL){
               $totalWithoutFee = $address->getOrigData('grand_total') - $address->getEspayFeeAmount();
@@ -93,11 +93,10 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
           }
 
           else {
-            $ccFee = floatval($dec) * floatval($total);
-            $fee = floatval($fee)+floatval($ccFee);
+              $ccFee = floatval($dec) * floatval($total);
+              $fee = floatval($fee)+floatval($ccFee);
           }
-
-          Mage::log("total: ". $total . " desc: " . $desc ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
+          // Mage::log("total: ". $total . " desc: " . $desc ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
         }
       }
       return $fee;
