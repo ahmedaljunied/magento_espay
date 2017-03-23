@@ -270,6 +270,11 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                 // Mage::log(print_r($order, 1), null, 'espay_responsesuccess.log');
 
                 // Start
+                $name = "init"; 
+                $email = "init@init.com"; 
+                $total = ""; 
+                $transfer_no = "init";
+                $transfer_bank = "init";
                 $url = "http://vendor.tinkerlust.com/api_paymentconfirm.php?payment_sd=yes&payment_update=yes&confirm=1&name=". urlencode($name) . "&email=". urlencode($email) . "&order_no=". urlencode($order_no)."&total=". urlencode($total) ."&transfer_no=" . urlencode($transfer_no) . "&transfer_bank=".urlencode($transfer_bank);
                 Mage::log(print_r($url, 1), null, 'espay_querystring.log');
 
@@ -292,6 +297,11 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                     // Mage::log("Order canceled", null, 'espay_responsefailed.log');
 
                     // Start
+                    $name = "init"; 
+                    $email = "init@init.com"; 
+                    $total = ""; 
+                    $transfer_no = "init";
+                    $transfer_bank = "init";                    
                     $url = "http://vendor.tinkerlust.com/api_paymentconfirm.php?payment_sd=yes&payment_update=yes&confirm=0&name=". urlencode($name) . "&email=". urlencode($email) . "&order_no=". urlencode($order_no)."&total=". urlencode($total) ."&transfer_no=" . urlencode($transfer_no) . "&transfer_bank=".urlencode($transfer_bank);
                     // Mage::log(print_r($url, 1), null, 'espay_querystring.log');
 
