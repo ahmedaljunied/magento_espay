@@ -270,6 +270,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                 // Mage::log(print_r($order, 1), null, 'espay_responsesuccess.log');
 
                 // Start
+                $order_no = $this->getRequest()->get("id");
                 $name = "init"; 
                 $email = "init@init.com"; 
                 $total = ""; 
@@ -297,6 +298,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                     // Mage::log("Order canceled", null, 'espay_responsefailed.log');
 
                     // Start
+                    $order_no = $this->getRequest()->get("id");
                     $name = "init"; 
                     $email = "init@init.com"; 
                     $total = ""; 
