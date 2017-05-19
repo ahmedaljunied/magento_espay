@@ -8,35 +8,36 @@ $installer->startSetup();
 
 // Insert statuses
 $installer->getConnection()->insertArray(
-        $statusTable, array(
-    'status',
-    'label'
-        ), array(
-    array('status' => 'accpt_espay_bcaatm', 'label' => 'ESPay BCA VA Online'),
-    array('status' => 'accpt_espay_bcaklikpay', 'label' => 'ESPay BCA KlikPay'),
-    array('status' => 'accpt_espay_xltunai', 'label' => 'ESPay XL TUNAI'),
-    array('status' => 'accpt_espay_biiatm', 'label' => 'ESPay ATM MULTIBANK'),
-    array('status' => 'accpt_espay_bnidbo', 'label' => 'ESPay BNI Debit Online'),
-    array('status' => 'accpt_espay_epaybri', 'label' => 'ESPay e-Pay BRI'),
-    array('status' => 'accpt_espay_briatm', 'label' => 'ESPay BRI ATM'),
-    array('status' => 'accpt_espay_danamonob', 'label' => 'ESPay Danamon Online Banking'),
-    array('status' => 'accpt_espay_danamonatm', 'label' => 'ESPay ATM Danamon'),
-    array('status' => 'accpt_espay_dkiib', 'label' => 'ESPay DKI IB'),
-    array('status' => 'accpt_espay_mandirisms', 'label' => 'ESPay MANDIRI SMS'),
-    array('status' => 'accpt_espay_finpay195', 'label' => 'ESPay Modern Channel'),
-    array('status' => 'accpt_espay_mandiriecash', 'label' => 'ESPay MANDIRI E-CASH'),
-    array('status' => 'accpt_espay_creditcard', 'label' => 'ESPay Credit Card Visa / Master'),
-    array('status' => 'accpt_espay_mandiriib', 'label' => 'ESPay MANDIRI IB'),
-    array('status' => 'accpt_espay_maspionatm', 'label' => 'ESPay ATM MASPION'),
-    array('status' => 'accpt_espay_mayapadaib', 'label' => 'ESPay Mayapada Internet Banking'),
-    array('status' => 'accpt_espay_muamalatatm', 'label' => 'ESPay MUAMALAT ATM'),
-    array('status' => 'accpt_espay_nobupay', 'label' => 'ESPay Nobu Pay'),
-    array('status' => 'accpt_espay_permataatm', 'label' => 'ESPay PERMATA ATM'),
-    array('status' => 'accpt_espay_permatapeb', 'label' => 'ESPay Permata ebusiness'),
-    array('status' => 'accpt_espay_permatanetpay', 'label' => 'ESPay PermataNet'),
-    array('status' => 'accpt_espay_emoedikk2', 'label' => 'ESPay EMOEDIKK2'),
-    array('status' => 'accpt_espay_emoedikk', 'label' => 'ESPay EMOEDIKK'),
-        )
+    $statusTable, array(
+        'status',
+        'label'
+    ), 
+    array(
+        array('status' => 'accpt_espay_bcaatm', 'label' => 'ESPay BCA VA Online'),
+        array('status' => 'accpt_espay_bcaklikpay', 'label' => 'ESPay BCA KlikPay'),
+        array('status' => 'accpt_espay_xltunai', 'label' => 'ESPay XL TUNAI'),
+        array('status' => 'accpt_espay_biiatm', 'label' => 'ESPay ATM MULTIBANK'),
+        array('status' => 'accpt_espay_bnidbo', 'label' => 'ESPay BNI Debit Online'),
+        array('status' => 'accpt_espay_epaybri', 'label' => 'ESPay e-Pay BRI'),
+        array('status' => 'accpt_espay_briatm', 'label' => 'ESPay BRI ATM'),
+        array('status' => 'accpt_espay_danamonob', 'label' => 'ESPay Danamon Online Banking'),
+        array('status' => 'accpt_espay_danamonatm', 'label' => 'ESPay ATM Danamon'),
+        array('status' => 'accpt_espay_dkiib', 'label' => 'ESPay DKI IB'),
+        array('status' => 'accpt_espay_mandirisms', 'label' => 'ESPay MANDIRI SMS'),
+        array('status' => 'accpt_espay_finpay195', 'label' => 'ESPay Modern Channel'),
+        array('status' => 'accpt_espay_mandiriecash', 'label' => 'ESPay MANDIRI E-CASH'),
+        array('status' => 'accpt_espay_creditcard', 'label' => 'ESPay Credit Card Visa / Master'),
+        array('status' => 'accpt_espay_mandiriib', 'label' => 'ESPay MANDIRI IB'),
+        array('status' => 'accpt_espay_maspionatm', 'label' => 'ESPay ATM MASPION'),
+        array('status' => 'accpt_espay_mayapadaib', 'label' => 'ESPay Mayapada Internet Banking'),
+        array('status' => 'accpt_espay_muamalatatm', 'label' => 'ESPay MUAMALAT ATM'),
+        array('status' => 'accpt_espay_nobupay', 'label' => 'ESPay Nobu Pay'),
+        array('status' => 'accpt_espay_permataatm', 'label' => 'ESPay PERMATA ATM'),
+        array('status' => 'accpt_espay_permatapeb', 'label' => 'ESPay Permata ebusiness'),
+        array('status' => 'accpt_espay_permatanetpay', 'label' => 'ESPay PermataNet'),
+        array('status' => 'accpt_espay_emoedikk2', 'label' => 'ESPay EMOEDIKK2'),
+        array('status' => 'accpt_espay_emoedikk', 'label' => 'ESPay EMOEDIKK'),
+    )
 );
 
 $installer->getConnection()->insertArray(

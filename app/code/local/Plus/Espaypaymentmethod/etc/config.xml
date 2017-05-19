@@ -7,7 +7,7 @@
   </modules>
   <global>
     <sales>
-     <quote>
+     <!--<quote>
        <totals>
          <espaypaymentmethod>
            <class>espaypaymentmethod/sales_quote_address_total_espaypaymentmethodfee</class>
@@ -15,7 +15,7 @@
            <admin_renderer>espaypaymentmethod/adminhtml_sales_order_create_totals_espaypaymentmethodfee</admin_renderer>
          </espaypaymentmethod>
        </totals>
-     </quote>
+     </quote>-->
      <order_invoice>
       <totals>
         <espaypaymentmethod>

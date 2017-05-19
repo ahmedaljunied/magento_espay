@@ -1,12 +1,15 @@
 <?php
 // app/code/local/Envato/Custompaymentmethod/Model/Paymentmethod.php
-class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract {
-  protected $_code  = 'espaypaymentmethod';
+abstract class Plus_Espaypaymentmethod_Model_Abstract extends Mage_Payment_Model_Method_Abstract {
+  protected $_code  = 'espaypaymentmethod_abstract';
   protected $_formBlockType = 'espaypaymentmethod/form_espaypaymentmethod';
   protected $_infoBlockType = 'espaypaymentmethod/info_espaypaymentmethod';
 
+
+
   public function assignData($data)
   {
+
     $dataPost = Mage::app()->getRequest()->getPost('payment');
 
     $info = $this->getInfoInstance();
@@ -15,6 +18,8 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
       Mage::getSingleton('core/session')->setEspayPaymentMethod($dataPost['espay_payment_method']);
       $info->setEspayPaymentMethod($dataPost['espay_payment_method']);
     }
+
+
     return $this;
   }
 
@@ -65,6 +70,7 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
 
   public static function getFee($address)
     {
+
       $paymentMethod = Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getCode();Mage::getSingleton('checkout/session')->getQuote()->getPayment()->getMethodInstance()->getCode();
       if ($paymentMethod === 'espaypaymentmethod'){
         $fee = 5000;
@@ -77,26 +83,17 @@ class Plus_Espaypaymentmethod_Model_Paymentmethod extends Mage_Payment_Model_Met
 
         if ($productCode === 'CREDITCARD' || $productCode === 'BNIDBO'){
           $pct = Mage::getStoreConfig('payment/espay/ccfee') ;
-          // Mage::log(print_r($pct, 1), null, 'espay_store_config.log');
+          
+          
           $dec = str_replace('%', '', $pct) / 100;
-          // Mage::log(print_r($dec, 1), null, 'espay_store_fee.log');
-
+          
           if ($address->getEspayFeeAmount() != 0 || $address->getEspayFeeAmount() !== NULL){
               $totalWithoutFee = $address->getOrigData('grand_total') - $address->getEspayFeeAmount();
           }
-          
           $total = floatval($totalWithoutFee) + floatval($fee);
+          $ccFee = floatval($dec) * floatval($total);
+          $fee = floatval($fee)+floatval($ccFee);
 
-          if ($productCode === 'CREDITCARD') {
-              $ccFee = (floatval(2.5) * $total) / 100;
-              $fee = $fee + $ccFee + 3000;
-          }
-
-          else {
-              $ccFee = floatval($dec) * floatval($total);
-              $fee = floatval($fee)+floatval($ccFee);
-          }
-          // Mage::log("total: ". $total . " desc: " . $desc ." ccFee: " . $ccFee . " fee: " . $fee, null, 'espay_store_tot_fee.log');
         }
       }
       return $fee;

@@ -48,7 +48,7 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                 ->loadByIncrementId($orderIncrementId);
         $sessionId = Mage::getSingleton('core/session');
         $orderData = $order->getData();
-
+        Mage::log(print_r($orderData, 1), null, 'espay_orderdata.log');
         $paymentData = $sessionId->getEspayPaymentMethod();
         $espayPayment = explode(':', $paymentData);
 
@@ -66,6 +66,26 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
         foreach (Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection() as $item) {
             Mage::getSingleton('checkout/cart')->removeItem($item->getId())->save();
         }
+
+        // Send payment to vendor dashboard 
+        $name = $orderData['customer_firstname'] . " " . $orderData['customer_middlename'] . " " . $orderData['customer_lastname'];
+        $email = $orderData['customer_email'];
+        $order_no = $orderData['increment_id'];
+        $total = explode(".", $orderData['grand_total'])[0];
+        $transfer_no = $orderData['customer_id'];
+        $transfer_bank = "Espay";
+
+        $url = "http://vendor.tinkerlust.com/api_paymentconfirm.php?payment_sd=yes&name=". urlencode($name) . "&email=". urlencode($email) . "&order_no=". urlencode($order_no)."&total=". urlencode($total) ."&transfer_no=" . urlencode($transfer_no) . "&transfer_bank=".urlencode($transfer_bank);
+        // Mage::log(print_r($url, 1), null, 'espay_querystring.log');
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_USERAGENT, 1);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        $resp = curl_exec($curl);
+        curl_close($curl);        
+        // end
 
         $this->loadLayout();
         $block = $this->getLayout()->createBlock('Mage_Core_Block_Template', 'espaypaymentmethod', array('template' => 'espaypaymentmethod/redirect.phtml'));
@@ -216,6 +236,8 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
         $atmProducts = $productModel->atmProduct();
         $product = $this->getRequest()->get("product");
 
+        Mage::log(print_r($product, 1), null, 'espay_responsedata.log');
+
         $atm = FALSE;
 
         if ($this->getRequest()->get("id") && $this->getRequest()->get("product")) {
@@ -243,9 +265,60 @@ class Plus_Espaypaymentmethod_PaymentController extends Mage_Core_Controller_Fro
                 Mage_Core_Controller_Varien_Action::_redirect('espaypaymentmethod/payment/pending', array('_secure' => false, '_use_rewrite' => true, '_query' => array('id' => $this->getRequest()->get("id"))));
             } else {
                 Mage_Core_Controller_Varien_Action::_redirect('checkout/onepage/success', array('_secure' => false));
+
+                // Mage::log(print_r($order, 1), null, 'espay_responsesuccess.log');
+
+                // Start
+                $order_no = $this->getRequest()->get("id");
+                $name = "init"; 
+                $email = "init@init.com"; 
+                $total = ""; 
+                $transfer_no = "init";
+                $transfer_bank = "init";
+                $url = "http://vendor.tinkerlust.com/api_paymentconfirm.php?payment_sd=yes&payment_update=yes&confirm=1&name=". urlencode($name) . "&email=". urlencode($email) . "&order_no=". urlencode($order_no)."&total=". urlencode($total) ."&transfer_no=" . urlencode($transfer_no) . "&transfer_bank=".urlencode($transfer_bank);
+                Mage::log(print_r($url, 1), null, 'espay_querystring.log');
+
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_USERAGENT, 1);
+                curl_setopt($curl, CURLOPT_POST, 1);
+                $resp = curl_exec($curl);
+                curl_close($curl);        
+                // end
             }
         } else {
             Mage_Core_Controller_Varien_Action::_redirect('checkout/onepage/failure', array('_secure' => false));
+            if ($order->canCancel()) {
+                try {
+                    $order->cancel();
+                    $order->getStatusHistoryCollection(true);
+                    $order->save();
+                    // Mage::log("Order canceled", null, 'espay_responsefailed.log');
+
+                    // Start
+                    $order_no = $this->getRequest()->get("id");
+                    $name = "init"; 
+                    $email = "init@init.com"; 
+                    $total = ""; 
+                    $transfer_no = "init";
+                    $transfer_bank = "init";                    
+                    $url = "http://vendor.tinkerlust.com/api_paymentconfirm.php?payment_sd=yes&payment_update=yes&confirm=0&name=". urlencode($name) . "&email=". urlencode($email) . "&order_no=". urlencode($order_no)."&total=". urlencode($total) ."&transfer_no=" . urlencode($transfer_no) . "&transfer_bank=".urlencode($transfer_bank);
+                    // Mage::log(print_r($url, 1), null, 'espay_querystring.log');
+
+                    $curl = curl_init();
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl, CURLOPT_URL, $url);
+                    curl_setopt($curl, CURLOPT_USERAGENT, 1);
+                    curl_setopt($curl, CURLOPT_POST, 1);
+                    $resp = curl_exec($curl);
+                    curl_close($curl);        
+                    // end
+
+                } catch (Exception $e) {
+                    Mage::logException($e);
+                }
+            }
         }
     }
 
